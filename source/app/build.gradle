@@ -20,13 +20,13 @@ android {
         }
     }
     namespace 'com.senliast.updatesmanagerextended'
-    compileSdk 34
+    compileSdk 37
 
     defaultConfig {
         applicationId "com.senliast.updatesmanagerextended"
-        minSdk 24
+        minSdk 26
         targetSdk 34
-        versionCode 11
+        versionCode 12
         versionName '4.2'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -42,8 +42,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 }
 
@@ -62,6 +62,6 @@ dependencies {
     implementation 'androidx.documentfile:documentfile:1.0.1'
     implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
 
-    compileOnly files('lib/api-82.jar')
-    compileOnly files('lib/api-82-sources.jar')
+    compileOnly 'io.github.libxposed:api:102.0.0'
+    implementation 'io.github.libxposed:service:102.0.0'
 }

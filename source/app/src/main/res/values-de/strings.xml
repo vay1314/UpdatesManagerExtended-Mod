@@ -5,7 +5,7 @@
     <string name="about_app_part_5" translatable="false">https://github.com/Senliast/xposed-modules/tree/main/Updates_Manager_Extended</string>
     <string name="default_group_name">Gruppe 1</string>
     <string name="module_description">Updates (einschließlich automatischer Updates) für ausgewählte Apps aus allen App-Stores blockieren</string>
-    <string name="app_status_not_loaded">Modul nicht geladen. Xposed fehlt möglicherweise, ist veraltet oder das Modul ist im Xposed Manager nicht aktiviert.</string>
+    <string name="app_status_not_loaded">Modul nicht verbunden. Verwenden Sie LSPosed oder ein kompatibles Framework mit API 102, aktivieren Sie dieses Modul und wählen Sie den Bereich System Framework (system) aus.</string>
     <string name="app_status_loaded_disabled">Modul geladen, aber deaktiviert</string>
     <string name="app_status_loaded_enabled">Modul geladen und aktiviert</string>
     <string name="enable_module">Modul aktivieren</string>

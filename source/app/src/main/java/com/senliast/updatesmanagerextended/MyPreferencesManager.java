@@ -46,75 +46,68 @@ import androidx.documentfile.provider.DocumentFile;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 public class MyPreferencesManager {
+    // Backup schema version; deliberately independent of the APK versionCode.
     private final int APP_VERSION_CODE = 11;
     public String getStringPreference(String a, String b) {
-        SharedPreferences preferences = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_WORLD_READABLE);
+        SharedPreferences preferences = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_PRIVATE);
         return preferences.getString(a, b);
     }
 
     public void setStringPreference(String a, String b) {
-        SharedPreferences.Editor editor = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_WORLD_READABLE).edit();
+        SharedPreferences.Editor editor = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_PRIVATE).edit();
         editor.putString(a, b);
         editor.apply();
     }
 
     public Boolean getBooleanPreference(String a, Boolean b) {
-        SharedPreferences preferences = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_WORLD_READABLE);
+        SharedPreferences preferences = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_PRIVATE);
         return preferences.getBoolean(a, b);
     }
 
     public void setBooleanPreference(String a, Boolean b) {
-        SharedPreferences.Editor editor = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_WORLD_READABLE).edit();
+        SharedPreferences.Editor editor = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_PRIVATE).edit();
         editor.putBoolean(a, b);
         editor.apply();
     }
 
     public SharedPreferences getSharedPreferences() {
-        return MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_WORLD_READABLE);
+        return MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_PRIVATE);
     }
 
-    // Test if preferences API is available. If not - it means, that Xposed is not installed or module is not enabled.
-    // Because an attempt to get preferences with "Context.MODE_WORLD_READABLE" in a normal Android will throw
-    // a SecurityException.
+    // Modern framework connectivity replaces the legacy world-readable preference probe.
     public Boolean testPreferences() {
-        SharedPreferences preferences;
-        try {
-            preferences = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_WORLD_READABLE);
-            return true;
-        } catch (SecurityException ignored) {
-            return false;
-        }
+        return FrameworkBridge.isAvailable();
     }
 
     public void setIntPreference(String a, Integer b) {
-        SharedPreferences.Editor editor = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_WORLD_READABLE).edit();
+        SharedPreferences.Editor editor = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_PRIVATE).edit();
         editor.putInt(a, b);
         editor.apply();
     }
 
     public Integer getIntPreference(String a, Integer b){
-        SharedPreferences preferences = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_WORLD_READABLE);
+        SharedPreferences preferences = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_PRIVATE);
         return preferences.getInt(a, b);
     }
 
     public void setLongPreference(String a, Long b) {
-        SharedPreferences.Editor editor = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_WORLD_READABLE).edit();
+        SharedPreferences.Editor editor = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_PRIVATE).edit();
         editor.putLong(a, b);
         editor.apply();
     }
 
     public Long getLongPreference(String a, Long b) {
-        SharedPreferences preferences = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_WORLD_READABLE);
+        SharedPreferences preferences = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_PRIVATE);
         return preferences.getLong(a, b);
     }
 
     public Boolean testPreference(String a ) {
-        SharedPreferences preferences = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_WORLD_READABLE);
+        SharedPreferences preferences = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_PRIVATE);
         return preferences.contains(a);
     }
 
     public void deletePreference(String a ) {
-        SharedPreferences.Editor editor = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_WORLD_READABLE).edit();
+        SharedPreferences.Editor editor = MyApplication.getAppContext().getSharedPreferences("Preferences", Context.MODE_PRIVATE).edit();
         editor.remove(a);
         editor.apply();
     }
@@ -122,7 +115,7 @@ public class MyPreferencesManager {
     public List<GroupInfo> getGroups() {
         Gson gson = new Gson();
         List<GroupInfo> groups = new ArrayList<>();
-        SharedPreferences preferences = MyApplication.getAppContext().getSharedPreferences("Groups", Context.MODE_WORLD_READABLE);
+        SharedPreferences preferences = MyApplication.getAppContext().getSharedPreferences("Groups", Context.MODE_PRIVATE);
         String json = preferences.getString("groups_list", null);
 
         if (json != null) {
@@ -145,7 +138,7 @@ public class MyPreferencesManager {
     public void saveGroups(List<GroupInfo> groups) {
         Gson gson = new Gson();
         String json = gson.toJson(groups);
-        SharedPreferences.Editor editor = MyApplication.getAppContext().getSharedPreferences("Groups", Context.MODE_WORLD_READABLE).edit();
+        SharedPreferences.Editor editor = MyApplication.getAppContext().getSharedPreferences("Groups", Context.MODE_PRIVATE).edit();
         editor.putString("groups_list", json).apply();
         editor.apply();
     }

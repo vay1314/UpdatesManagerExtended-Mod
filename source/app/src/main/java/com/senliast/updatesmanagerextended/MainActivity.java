@@ -76,7 +76,8 @@ public class MainActivity extends AppCompatActivity {
             String type = intent.getStringExtra("type");
             String eventName = intent.getStringExtra("event_name");
 
-            if ("event".equals(type) && "on_preferences_imported".equals(eventName)) {
+            if ("event".equals(type) && ("on_preferences_imported".equals(eventName)
+                    || "on_framework_state_changed".equals(eventName))) {
                 updateGui();
             }
         }
@@ -385,7 +386,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        FrameworkBridge.refresh();
         updateGui();
     }
 }
-

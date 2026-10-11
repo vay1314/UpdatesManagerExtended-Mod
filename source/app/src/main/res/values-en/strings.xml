@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Updates Manager Extended</string>
-    <string name="app_status_not_loaded">Module not loaded. Xposed may be missing or outdated, or the module may not be enabled in Xposed Manager.</string>
+    <string name="app_status_not_loaded">Module not connected. Use LSPosed or a compatible framework supporting API 102, enable this module, and select the System Framework (system) scope.</string>
     <string name="app_status_loaded_disabled">Module loaded, but disabled</string>
     <string name="app_status_loaded_enabled">Module loaded and enabled</string>
     <string name="enable_module">Enable module</string>

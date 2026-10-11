@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">应用更新管理器</string>
-    <string name="app_status_not_loaded">模块未加载。可能未安装 Xposed、Xposed 版本过旧，或尚未在 Xposed 管理器中启用此模块。</string>
+    <string name="app_status_not_loaded">模块未连接。请使用支持 API 102 的 LSPosed 或兼容框架，启用此模块并选择“系统框架（system）”作用域。</string>
     <string name="app_status_loaded_disabled">模块已加载，但未启用</string>
     <string name="app_status_loaded_enabled">模块已加载并启用</string>
     <string name="enable_module">启用模块</string>

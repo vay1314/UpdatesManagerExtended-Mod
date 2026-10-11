@@ -18,11 +18,12 @@
 
 ## 兼容性
 
+已迁移至现代 **libxposed API 102**，需要支持该 API 的 LSPosed 或兼容框架；不再使用旧版 Xposed API。
+
 - 应用商店：所有应用商店。
 - CPU：arm、arm64、x86、x64。
 - Android：
-  - 保证支持 AOSP Android 13–14。
-  - 预计支持 AOSP Android 12、15、16。
+  - 支持 AOSP Android 13–14，预计支持 AOSP Android 12、15、16。
   - 不支持 Android 11 及以下版本。
   - 对于三星、MIUI 等厂商系统，只要 Android 版本匹配，可能可以运行，但不作保证。
 
@@ -33,7 +34,7 @@
 ## 安装与使用
 
 1. 安装 APK。
-2. 在 LSPosed 管理器中启用模块，并将“系统框架”（System Framework，包名 android）加入作用域。
+2. 在 LSPosed 管理器中启用模块，并选择 “系统框架”作用域。
 3. 重启设备。
 4. 打开应用，启用模块，进入“管理规则分组”。
 5. 在分组中选择禁止更新的应用，以及要拦截的安装来源（应用商店）。启用“拦截所有安装来源的更新”可拦截该分组内应用来自所有来源的更新。
@@ -62,11 +63,15 @@
 
 ## 源码构建
 
-Android 项目位于 source/，使用 Java 8 源码兼容级别、Android SDK 34、Android Gradle Plugin 8.10.1 和 Gradle 8.11.1。构建环境需要可运行该工具链的 JDK 和 Android SDK。
+Android 项目位于 source/，使用 Java 17 源码兼容级别、编译 SDK 37、目标 SDK 34、Android Gradle Plugin 8.10.1 和 Gradle 8.11.1。构建环境需要 JDK 17 或以上及 Android SDK 37。最低安装版本为 Android 8（API 26），实际拦截逻辑仍面向 Android 12 或以上。
+
+依赖为 Maven Central 正式发布的 io.github.libxposed:api:102.0.0（仅编译时）和 io.github.libxposed:service:102.0.0（打包至应用）。编译 SDK 37 是新版库要求，不表示应用只能在 Android 17 上运行。现有构建工具可以完成编译，但 AGP 8.10.1 会提示其已测试的最高编译 SDK 为 36。
 
 调试版可在 source/ 目录运行 `./gradlew assembleDebug`（Windows 使用 `gradlew.bat assembleDebug`）构建，无需发布签名配置。需要在本机配置 Android SDK 路径，例如设置 ANDROID_HOME。
 
 发布版签名配置文件为 source/keystore.properties，其中包含 storeFile、storePassword、keyAlias 和 keyPassword。未配置时，`assembleRelease` 生成未签名 APK。原作者签名密钥未随源码提供，使用不同签名构建的 APK 通常不能直接覆盖原版，即使包名相同。
+
+规则回归测试可在 source/ 目录运行 `./gradlew testDebugUnitTest`。包含启用与停用、暂停到期边界、应用和安装来源精确匹配、全部来源、缺失数据及损坏数据等情况。
 
 ## 原作者
 

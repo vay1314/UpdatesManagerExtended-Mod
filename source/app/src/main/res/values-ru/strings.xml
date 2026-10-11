@@ -5,7 +5,7 @@
     <string name="about_app_part_5" translatable="false">https://github.com/Senliast/xposed-modules/tree/main/Updates_Manager_Extended</string>
     <string name="default_group_name">Группа 1</string>
     <string name="module_description">Блокировка обновлений (включая автоматические) выбранных приложений из любых магазинов приложений</string>
-    <string name="app_status_not_loaded">Модуль не загружен. Возможно, Xposed не установлен, его версия устарела или модуль не включён в менеджере Xposed.</string>
+    <string name="app_status_not_loaded">Модуль не подключён. Используйте LSPosed или совместимый фреймворк с поддержкой API 102, включите этот модуль и выберите область действия System Framework (system).</string>
     <string name="app_status_loaded_disabled">Модуль загружен, но выключен</string>
     <string name="app_status_loaded_enabled">Модуль загружен и включён</string>
     <string name="enable_module">Включить модуль</string>
