@@ -19,14 +19,14 @@ android {
             }
         }
     }
-    namespace 'com.senliast.updatesmanagerextended'
+    namespace 'io.github.vay1314.updatesmanagerextendedmod'
     compileSdk 37
 
     defaultConfig {
-        applicationId "com.senliast.updatesmanagerextended"
+        applicationId "io.github.vay1314.updatesmanagerextendedmod"
         minSdk 26
         targetSdk 34
-        versionCode 16
+        versionCode 17
         versionName '4.2'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

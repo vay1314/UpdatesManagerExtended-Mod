@@ -1,6 +1,8 @@
-# 应用更新管理器（Updates Manager Extended）
+# 应用更新管理器（Updates Manager Extended Mod）
 
 ## 简介
+
+**UpdatesManagerExtended-Mod** 是基于 Senliast 的 Updates Manager Extended v4.2 开发的增强版本，包含多语言完善、libxposed API 102 适配、热重载和使用体验优化。
 
 这是一个 Xposed 模块，可禁止指定应用更新（包括自动更新），无论应用来自哪个应用商店。选中需要禁止更新的应用后，应用商店仍会检测到更新，但无法安装更新。
 
@@ -75,7 +77,7 @@ Android 项目位于 source/，使用 Java 17 源码兼容级别、编译 SDK 37
 
 Senliast：[原项目](https://github.com/Senliast/xposed-modules/tree/main/Updates_Manager_Extended)。
 
-基于原版 v4.2，保留应用更新拦截、规则分组和定时暂停功能，并进行了以下增强：
+UpdatesManagerExtended-Mod 保留原版 v4.2 的应用更新拦截、规则分组和定时暂停功能，并进行了以下增强：
 
 - **完善多语言支持**：新增简体中文和繁体中文，补齐并润色英文、德文和俄文。应用名称、模块说明、界面和操作提示随系统语言显示。
 

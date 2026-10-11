@@ -133,7 +133,7 @@
 
             <view
                 android:id="@+id/mobvSwitchEnableGroup"
-                class="com.senliast.updatesmanagerextended.MyObjectBackgroundView"
+                class="io.github.vay1314.updatesmanagerextendedmod.MyObjectBackgroundView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"

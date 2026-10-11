@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layerType="software">
 
-    <com.senliast.updatesmanagerextended.MyObjectBackgroundView
+    <io.github.vay1314.updatesmanagerextendedmod.MyObjectBackgroundView
         android:id="@+id/mobvStatusPanelBackground"
         android:layout_width="0dp"
         android:layout_height="0dp"
