@@ -45,7 +45,7 @@ public class AppSelectionActivity extends AppCompatActivity {
     private List<AppInfo> finalAppList;
     private Set<String> toggledApps;
     private boolean showSystemApps = false;
-    private boolean sortToggledFirst = false;
+    private boolean sortToggledFirst = true;
     private SearchView searchView;
     MyPreferencesManager myPreferencesManager = new MyPreferencesManager();
     private MaterialAlertDialogBuilder builder;

@@ -47,7 +47,7 @@ public class InstallationSourceSelectionActivity extends AppCompatActivity {
     private List<InstallationSourceInfo> appList;
     private List<InstallationSourceInfo> finalAppList;
     private Set<String> toggledApps;
-    private boolean sortToggledFirst = false;
+    private boolean sortToggledFirst = true;
     private SearchView searchView;
     MyPreferencesManager myPreferencesManager = new MyPreferencesManager();
     private MaterialAlertDialogBuilder builder;
