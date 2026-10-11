@@ -50,5 +50,7 @@
     <string name="app_status_disabled_for_groups">Module disabled</string>
     <string name="module_description">Block updates (including automatic updates) for selected apps from any app store</string>
     <string name="app_status_reloading">Hot-reloading the module. Please wait…</string>
+    <string name="app_status_not_running">No module was detected in the system process. Check that the module and System Framework (system) scope are enabled in LSPosed. If you already restarted, check the module loading logs.</string>
+    <string name="app_status_unknown">Cannot determine the module runtime state. Check the logs for framework service or runtime query errors.</string>
 </resources>
 

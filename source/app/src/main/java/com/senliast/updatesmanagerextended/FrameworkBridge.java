@@ -25,8 +25,8 @@ public final class FrameworkBridge {
     private static XposedService service;
     private static SharedPreferences remoteRules;
     private static volatile boolean ready;
-    public enum RuntimeState { ACTIVE, RELOADING, RESTART_REQUIRED }
-    private static volatile RuntimeState runtimeState = RuntimeState.RESTART_REQUIRED;
+    public enum RuntimeState { ACTIVE, RELOADING, RESTART_REQUIRED, NOT_RUNNING, STATUS_UNAVAILABLE }
+    private static volatile RuntimeState runtimeState = RuntimeState.STATUS_UNAVAILABLE;
     private static boolean reloadAttempted;
     private static long reloadDeadline;
     private static final Runnable RUNTIME_POLL = FrameworkBridge::refreshRuntime;
@@ -55,6 +55,7 @@ public final class FrameworkBridge {
                     reloadAttempted = false;
                     reloadDeadline = 0L;
                     MAIN.removeCallbacks(RUNTIME_POLL);
+                    setRuntimeState(RuntimeState.STATUS_UNAVAILABLE);
                     refresh();
                 });
             }
@@ -140,15 +141,9 @@ public final class FrameworkBridge {
         MAIN.removeCallbacks(RUNTIME_POLL);
         if (service == null || !ready) return;
         try {
-            HookedTarget system = null;
-            for (HookedTarget target : service.getRunningTargets()) {
-                if ("system_server".equals(target.getProcessName())) {
-                    system = target;
-                    break;
-                }
-            }
+            HookedTarget system = RuntimeTargetSelector.systemServer(service.getRunningTargets());
             if (system == null) {
-                setRuntimeState(RuntimeState.RESTART_REQUIRED);
+                setRuntimeState(RuntimeState.NOT_RUNNING);
             } else if (system.getState() == HookedTarget.State.UP_TO_DATE) {
                 reloadDeadline = 0L;
                 setRuntimeState(RuntimeState.ACTIVE);
@@ -176,7 +171,7 @@ public final class FrameworkBridge {
             }
         } catch (RuntimeException e) {
             MAIN.removeCallbacks(RUNTIME_POLL);
-            setRuntimeState(RuntimeState.RESTART_REQUIRED);
+            setRuntimeState(RuntimeState.STATUS_UNAVAILABLE);
             Log.e(TAG, "Cannot determine or reload the running module", e);
         }
     }

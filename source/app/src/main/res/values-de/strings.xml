@@ -51,4 +51,6 @@
     <string name="app_status_paused">"Modul geladen, aber pausiert, verbleibende Zeit: "</string>
     <string name="app_status_disabled_for_groups">Modul deaktiviert</string>
     <string name="app_status_reloading">Modul wird neu geladen. Bitte warten…</string>
+    <string name="app_status_not_running">Kein Modul im Systemprozess erkannt. Prüfen Sie in LSPosed, ob das Modul und der Bereich System Framework (system) aktiviert sind. Wenn das Gerät bereits neu gestartet wurde, prüfen Sie die Modulprotokolle.</string>
+    <string name="app_status_unknown">Der Laufzeitstatus des Moduls kann nicht ermittelt werden. Prüfen Sie die Protokolle auf Fehler beim Framework-Dienst oder bei der Statusabfrage.</string>
 </resources>

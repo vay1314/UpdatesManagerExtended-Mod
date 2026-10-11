@@ -26,7 +26,7 @@ android {
         applicationId "com.senliast.updatesmanagerextended"
         minSdk 26
         targetSdk 34
-        versionCode 13
+        versionCode 14
         versionName '4.2'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

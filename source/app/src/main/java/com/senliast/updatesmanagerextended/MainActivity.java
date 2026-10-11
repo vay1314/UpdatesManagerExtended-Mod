@@ -305,8 +305,21 @@ public class MainActivity extends AppCompatActivity {
 
             FrameworkBridge.RuntimeState runtimeState = FrameworkBridge.getRuntimeState();
             if (runtimeState != FrameworkBridge.RuntimeState.ACTIVE) {
-                textViewAppStatus.setText(runtimeState == FrameworkBridge.RuntimeState.RELOADING
-                        ? R.string.app_status_reloading : R.string.app_status_waiting_for_reboot);
+                int message;
+                switch (runtimeState) {
+                    case RELOADING:
+                        message = R.string.app_status_reloading;
+                        break;
+                    case NOT_RUNNING:
+                        message = R.string.app_status_not_running;
+                        break;
+                    case STATUS_UNAVAILABLE:
+                        message = R.string.app_status_unknown;
+                        break;
+                    default:
+                        message = R.string.app_status_waiting_for_reboot;
+                }
+                textViewAppStatus.setText(message);
                 mobvStatusPanelBackground.setRectangleColor(Color.YELLOW);
                 imageViewStatusPanelSymbol.setImageResource(R.drawable.yellow_exclamation_mark_icon);
             }
