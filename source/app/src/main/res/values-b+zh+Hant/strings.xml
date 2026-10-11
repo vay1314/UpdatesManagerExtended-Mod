@@ -21,10 +21,10 @@
     <string name="error_importing_preferences">匯入設定失敗：</string>
     <string name="preferences_successfully_exported">設定已成功匯出至檔案：</string>
     <string name="error_exporting_preferences">匯出設定失敗：</string>
-    <string name="app_status_waiting_for_reboot">模組尚未生效：安裝或更新模組後，尚未重新啟動裝置。目前允許所有應用程式更新！請重新啟動裝置以使模組生效。</string>
+    <string name="app_status_waiting_for_reboot">目前的模組程式碼尚未生效。首次啟用、從不支援熱重載的舊版升級或熱重載失敗時，請重新啟動裝置。</string>
     <string name="welcome_message_title">歡迎使用應用程式更新管理器 Xposed 模組</string>
     <string name="ok">確定</string>
-    <string name="info_always_reboot_after_update">每次更新此模組後，請務必重新啟動裝置，以確保模組繼續正常運作。</string>
+    <string name="info_always_reboot_after_update">此模組支援熱重載，更新後通常無需重新啟動。首次啟用、從不支援熱重載的舊版升級或熱重載失敗時，仍需重新啟動裝置。</string>
     <string name="select_installation_sources">選擇要攔截的安裝來源（應用程式商店）</string>
     <string name="select_groups">管理規則群組</string>
     <string name="add_group_title">新增群組</string>
@@ -49,4 +49,5 @@
     <string name="app_status_paused">模組已載入但已暫停，剩餘時間：</string>
     <string name="app_status_disabled_for_groups">模組已停用</string>
     <string name="module_description">禁止指定應用程式更新（包括自動更新），適用於所有應用程式商店</string>
+    <string name="app_status_reloading">正在熱重載模組，請稍候…</string>
 </resources>

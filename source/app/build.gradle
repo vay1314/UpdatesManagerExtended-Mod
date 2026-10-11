@@ -26,7 +26,7 @@ android {
         applicationId "com.senliast.updatesmanagerextended"
         minSdk 26
         targetSdk 34
-        versionCode 12
+        versionCode 13
         versionName '4.2'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -53,6 +53,7 @@ dependencies {
     implementation libs.activity
     implementation libs.constraintlayout
     testImplementation libs.junit
+    testImplementation 'io.github.libxposed:api:102.0.0'
     androidTestImplementation libs.ext.junit
     androidTestImplementation libs.espresso.core
     implementation 'com.google.android.material:material:1.12.0'

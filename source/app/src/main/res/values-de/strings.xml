@@ -24,10 +24,10 @@
     <string name="error_importing_preferences">"Fehler beim Importieren von Einstellungen: "</string>
     <string name="preferences_successfully_exported">"Einstellungen erfolgreich in die Datei exportiert: "</string>
     <string name="error_exporting_preferences">"Fehler beim Exportieren von Einstellungen: "</string>
-    <string name="app_status_waiting_for_reboot">Das Modul ist noch nicht aktiv, da das Gerät seit der Installation oder Aktualisierung des Moduls nicht neu gestartet wurde. Alle App-Updates sind derzeit erlaubt! Starten Sie das Gerät neu, um das Modul zu aktivieren.</string>
+    <string name="app_status_waiting_for_reboot">Der aktuelle Modulcode ist noch nicht aktiv. Starten Sie das Gerät nach der ersten Aktivierung, einem Upgrade von einer Version ohne Hot-Reload-Unterstützung oder einem fehlgeschlagenen Hot Reload neu.</string>
     <string name="welcome_message_title">Willkommen beim Xposed-Modul App-Update-Manager</string>
     <string name="ok">OK</string>
-    <string name="info_always_reboot_after_update">Starten Sie das Gerät nach jeder Aktualisierung dieses Moduls neu, damit es weiterhin funktioniert.</string>
+    <string name="info_always_reboot_after_update">Dieses Modul unterstützt Hot Reload. Updates werden normalerweise ohne Neustart wirksam. Nach der ersten Aktivierung, einem Upgrade von einer Version ohne Hot-Reload-Unterstützung oder einem fehlgeschlagenen Hot Reload ist ein Neustart erforderlich.</string>
     <string name="select_installation_sources">Zu blockierende Installationsquellen (App-Stores) auswählen</string>
     <string name="select_groups">Regelgruppen verwalten</string>
     <string name="add_group_title">Gruppe hinzufügen</string>
@@ -50,4 +50,5 @@
     <string name="until_enabled_manually">Bis zur manuellen Aktivierung</string>
     <string name="app_status_paused">"Modul geladen, aber pausiert, verbleibende Zeit: "</string>
     <string name="app_status_disabled_for_groups">Modul deaktiviert</string>
+    <string name="app_status_reloading">Modul wird neu geladen. Bitte warten…</string>
 </resources>

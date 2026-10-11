@@ -21,10 +21,10 @@
     <string name="error_importing_preferences">导入设置失败：</string>
     <string name="preferences_successfully_exported">设置已成功导出至文件：</string>
     <string name="error_exporting_preferences">导出设置失败：</string>
-    <string name="app_status_waiting_for_reboot">模块尚未生效：安装或更新模块后，还未重启设备。目前允许所有应用更新！请重启设备以使模块生效。</string>
+    <string name="app_status_waiting_for_reboot">当前模块代码尚未生效。首次启用、从不支持热重载的旧版升级或热重载失败时，请重启设备。</string>
     <string name="welcome_message_title">欢迎使用应用更新管理器 Xposed 模块</string>
     <string name="ok">确定</string>
-    <string name="info_always_reboot_after_update">每次更新此模块后，请务必重启设备，以确保模块继续正常工作。</string>
+    <string name="info_always_reboot_after_update">此模块支持热重载，更新后通常无需重启。首次启用、从不支持热重载的旧版升级或热重载失败时，仍需重启设备。</string>
     <string name="select_installation_sources">选择要拦截的安装来源（应用商店）</string>
     <string name="select_groups">管理规则分组</string>
     <string name="add_group_title">添加分组</string>
@@ -49,4 +49,5 @@
     <string name="app_status_paused">模块已加载但已暂停，剩余时间：</string>
     <string name="app_status_disabled_for_groups">模块已停用</string>
     <string name="module_description">禁止指定应用更新（包括自动更新），适用于所有应用商店</string>
+    <string name="app_status_reloading">正在热重载模块，请稍候…</string>
 </resources>

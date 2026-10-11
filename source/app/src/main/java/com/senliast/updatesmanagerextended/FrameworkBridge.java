@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.SystemClock;
 import android.util.Log;
 
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import io.github.libxposed.service.XposedService;
 import io.github.libxposed.service.XposedServiceHelper;
+import io.github.libxposed.service.HookedTarget;
+import io.github.libxposed.service.HotReloadResult;
 
 /** Keeps local settings and backup formats, publishing rules through the modern service. */
 public final class FrameworkBridge {
@@ -22,6 +25,11 @@ public final class FrameworkBridge {
     private static XposedService service;
     private static SharedPreferences remoteRules;
     private static volatile boolean ready;
+    public enum RuntimeState { ACTIVE, RELOADING, RESTART_REQUIRED }
+    private static volatile RuntimeState runtimeState = RuntimeState.RESTART_REQUIRED;
+    private static boolean reloadAttempted;
+    private static long reloadDeadline;
+    private static final Runnable RUNTIME_POLL = FrameworkBridge::refreshRuntime;
 
     // SharedPreferences keeps weak references, so retain this listener for the process lifetime.
     private static final SharedPreferences.OnSharedPreferenceChangeListener SETTINGS_LISTENER =
@@ -44,6 +52,9 @@ public final class FrameworkBridge {
                 MAIN.post(() -> {
                     service = boundService;
                     remoteRules = null;
+                    reloadAttempted = false;
+                    reloadDeadline = 0L;
+                    MAIN.removeCallbacks(RUNTIME_POLL);
                     refresh();
                 });
             }
@@ -54,6 +65,8 @@ public final class FrameworkBridge {
                     if (service == deadService) {
                         service = null;
                         remoteRules = null;
+                        MAIN.removeCallbacks(RUNTIME_POLL);
+                        setRuntimeState(RuntimeState.RESTART_REQUIRED);
                         setReady(false);
                     }
                 });
@@ -65,6 +78,10 @@ public final class FrameworkBridge {
         return ready;
     }
 
+    public static RuntimeState getRuntimeState() {
+        return runtimeState;
+    }
+
     /** Recheck scope when returning from the framework manager and reconnect saved rules. */
     public static void refresh() {
         if (service == null) {
@@ -74,6 +91,8 @@ public final class FrameworkBridge {
         try {
             if (service.getApiVersion() < 102 || !service.getScope().contains("system")) {
                 remoteRules = null;
+                MAIN.removeCallbacks(RUNTIME_POLL);
+                setRuntimeState(RuntimeState.RESTART_REQUIRED);
                 setReady(false);
                 return;
             }
@@ -83,6 +102,7 @@ public final class FrameworkBridge {
                 remoteRules = service.getRemotePreferences("Rules");
             }
             publishRules();
+            if (ready) refreshRuntime();
         } catch (RuntimeException e) {
             remoteRules = null;
             setReady(false);
@@ -107,6 +127,71 @@ public final class FrameworkBridge {
     private static void setReady(boolean value) {
         if (ready == value) return;
         ready = value;
+        notifyStateChanged();
+    }
+
+    private static void setRuntimeState(RuntimeState state) {
+        if (runtimeState == state) return;
+        runtimeState = state;
+        notifyStateChanged();
+    }
+
+    private static void refreshRuntime() {
+        MAIN.removeCallbacks(RUNTIME_POLL);
+        if (service == null || !ready) return;
+        try {
+            HookedTarget system = null;
+            for (HookedTarget target : service.getRunningTargets()) {
+                if ("system_server".equals(target.getProcessName())) {
+                    system = target;
+                    break;
+                }
+            }
+            if (system == null) {
+                setRuntimeState(RuntimeState.RESTART_REQUIRED);
+            } else if (system.getState() == HookedTarget.State.UP_TO_DATE) {
+                reloadDeadline = 0L;
+                setRuntimeState(RuntimeState.ACTIVE);
+            } else if (system.getState() == HookedTarget.State.RELOADING) {
+                waitForReload();
+            } else if (system.getState() == HookedTarget.State.STALE && !reloadAttempted) {
+                // Automatic update reload may not have started; request it once for this app process.
+                reloadAttempted = true;
+                XposedService requestingService = service;
+                waitForReload();
+                service.hotReloadModule(system, null, (target, result) -> MAIN.post(() -> {
+                    if (service != requestingService) return;
+                    if (result.status() == HotReloadResult.Status.SUCCEEDED
+                            || result.status() == HotReloadResult.Status.IN_PROGRESS) {
+                        refreshRuntime();
+                    } else {
+                        MAIN.removeCallbacks(RUNTIME_POLL);
+                        setRuntimeState(RuntimeState.RESTART_REQUIRED);
+                        Log.w(TAG, "Hot reload requires a restart: " + result.status()
+                                + "; " + result.message());
+                    }
+                }));
+            } else {
+                setRuntimeState(RuntimeState.RESTART_REQUIRED);
+            }
+        } catch (RuntimeException e) {
+            MAIN.removeCallbacks(RUNTIME_POLL);
+            setRuntimeState(RuntimeState.RESTART_REQUIRED);
+            Log.e(TAG, "Cannot determine or reload the running module", e);
+        }
+    }
+
+    private static void waitForReload() {
+        if (reloadDeadline == 0L) reloadDeadline = SystemClock.elapsedRealtime() + 30000L;
+        if (SystemClock.elapsedRealtime() >= reloadDeadline) {
+            setRuntimeState(RuntimeState.RESTART_REQUIRED);
+        } else {
+            setRuntimeState(RuntimeState.RELOADING);
+            MAIN.postDelayed(RUNTIME_POLL, 1000L);
+        }
+    }
+
+    private static void notifyStateChanged() {
         Intent event = new Intent("com.senliast.updatesmanagerextended.BROADCAST");
         event.putExtra("type", "event");
         event.putExtra("event_name", "on_framework_state_changed");

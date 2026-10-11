@@ -24,10 +24,10 @@
     <string name="error_importing_preferences">"Ошибка импорта настроек: "</string>
     <string name="preferences_successfully_exported">"Настройки успешно экспортированы в файл: "</string>
     <string name="error_exporting_preferences">"Ошибка экспорта настроек: "</string>
-    <string name="app_status_waiting_for_reboot">Модуль ещё не работает: после его установки или обновления устройство не было перезагружено. Сейчас разрешены все обновления приложений! Перезагрузите устройство, чтобы модуль начал работать.</string>
+    <string name="app_status_waiting_for_reboot">Текущая версия модуля ещё не действует. Перезагрузите устройство после первого включения, обновления с версии без поддержки горячей перезагрузки или неудачной горячей перезагрузки.</string>
     <string name="welcome_message_title">Добро пожаловать в модуль Xposed «Менеджер обновлений»</string>
     <string name="ok">OK</string>
-    <string name="info_always_reboot_after_update">После каждого обновления этого модуля обязательно перезагружайте устройство, чтобы он продолжал работать.</string>
+    <string name="info_always_reboot_after_update">Модуль поддерживает горячую перезагрузку, поэтому обновления обычно применяются без перезагрузки устройства. После первого включения, обновления с версии без этой функции или неудачной горячей перезагрузки необходимо перезагрузить устройство.</string>
     <string name="select_installation_sources">Выбрать источники установки для блокировки (магазины приложений)</string>
     <string name="select_groups">Управление группами правил</string>
     <string name="add_group_title">Добавить группу</string>
@@ -50,4 +50,5 @@
     <string name="until_enabled_manually">До включения вручную</string>
     <string name="app_status_paused">"Модуль загружен, но приостановлен, осталось: "</string>
     <string name="app_status_disabled_for_groups">Модуль выключен</string>
+    <string name="app_status_reloading">Выполняется горячая перезагрузка модуля. Подождите…</string>
 </resources>

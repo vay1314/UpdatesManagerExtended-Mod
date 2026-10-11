@@ -21,10 +21,10 @@
     <string name="error_importing_preferences">"Error importing settings: "</string>
     <string name="preferences_successfully_exported">"Settings successfully exported to file: "</string>
     <string name="error_exporting_preferences">"Error exporting settings: "</string>
-    <string name="app_status_waiting_for_reboot">The module is not active because the device has not been restarted since the module was installed or updated. All app updates are currently allowed! Restart the device to activate the module.</string>
+    <string name="app_status_waiting_for_reboot">The current module code is not active. Restart the device after first enabling the module, upgrading from a version without hot reload support, or a failed hot reload.</string>
     <string name="welcome_message_title">Welcome to the Updates Manager Extended Xposed module</string>
     <string name="ok">OK</string>
-    <string name="info_always_reboot_after_update">Always restart the device after updating this module to ensure it continues to work.</string>
+    <string name="info_always_reboot_after_update">This module supports hot reload, so updates usually take effect without restarting. Restart the device after first enabling the module, upgrading from a version without hot reload support, or a failed hot reload.</string>
     <string name="select_installation_sources">Select installation sources to block (app stores)</string>
     <string name="select_groups">Manage rule groups</string>
     <string name="add_group_title">Add group</string>
@@ -49,5 +49,6 @@
     <string name="app_status_paused">"Module loaded but paused, time remaining: "</string>
     <string name="app_status_disabled_for_groups">Module disabled</string>
     <string name="module_description">Block updates (including automatic updates) for selected apps from any app store</string>
+    <string name="app_status_reloading">Hot-reloading the module. Please wait…</string>
 </resources>
 

@@ -7,9 +7,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.content.pm.PackageInfo;
-
-import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -50,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
     private MaterialAlertDialogBuilder builder;
     private MyObjectBackgroundView mobvStatusPanelBackground;
     private MyObjectBackgroundView mobvSwitchEnabledBackground;
-    private long lastUpdateTime;
-    private boolean waitingForReboot;
     private View viewDialogWelcome;
     private AlertDialog alertDialogDialogWelcome;
     private Button buttonDialogWelcomeOkButton;
@@ -260,19 +255,6 @@ public class MainActivity extends AppCompatActivity {
             mobvSwitchEnabledBackground.setRectangleColor(MyApplication.getAppContext().getColor(com.google.android.material.R.color.m3_sys_color_dynamic_light_primary_container));
         }
 
-        try {
-            PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
-            lastUpdateTime = packageInfo.lastUpdateTime;
-
-            if ((System.currentTimeMillis() - SystemClock.uptimeMillis()) < lastUpdateTime) {
-                waitingForReboot = true;
-            } else {
-                waitingForReboot = false;
-            }
-        } catch (Exception e) {
-
-        }
-
         timerHelper = new CountdownTimerHelper();
 
         updateGui();
@@ -321,14 +303,12 @@ public class MainActivity extends AppCompatActivity {
                 showWelcomeDialog();
             }
 
-            if (waitingForReboot) {
-                textViewAppStatus.setText(R.string.app_status_waiting_for_reboot);
+            FrameworkBridge.RuntimeState runtimeState = FrameworkBridge.getRuntimeState();
+            if (runtimeState != FrameworkBridge.RuntimeState.ACTIVE) {
+                textViewAppStatus.setText(runtimeState == FrameworkBridge.RuntimeState.RELOADING
+                        ? R.string.app_status_reloading : R.string.app_status_waiting_for_reboot);
                 mobvStatusPanelBackground.setRectangleColor(Color.YELLOW);
                 imageViewStatusPanelSymbol.setImageResource(R.drawable.yellow_exclamation_mark_icon);
-                switchModuleEnabled.setEnabled(false);
-                buttonSelectBlacklistedApps.setEnabled(false);
-                buttonImportSettings.setEnabled(false);
-                buttonExportSettings.setEnabled(false);
             }
         } else {
             switchModuleEnabledSwitchedListenerEnabled = false;
@@ -366,7 +346,12 @@ public class MainActivity extends AppCompatActivity {
         long endTime = myPreferencesManager.getLongPreference("moduleStatusTime" ,0L);
 
         timerHelper.startCountdown(endTime,
-                timeLeft -> textViewAppStatus.setText(MyApplication.getAppContext().getString(R.string.app_status_paused) + timeLeft),
+                timeLeft -> {
+                    if (FrameworkBridge.isAvailable()
+                            && FrameworkBridge.getRuntimeState() == FrameworkBridge.RuntimeState.ACTIVE) {
+                        textViewAppStatus.setText(getString(R.string.app_status_paused) + timeLeft);
+                    }
+                },
                 () -> {
                     myPreferencesManager.setStringPreference("moduleStatus", "enabled_immediately");
                     myPreferencesManager.setLongPreference("moduleStatusTime", 0L);
