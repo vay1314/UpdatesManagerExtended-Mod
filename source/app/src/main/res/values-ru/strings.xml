@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Менеджер обновлений</string>
+    <string name="about_app_part_1">Менеджер обновлений v4.2</string>
+    <string name="about_app_part_5" translatable="false">https://github.com/Senliast/xposed-modules/tree/main/Updates_Manager_Extended</string>
+    <string name="default_group_name">Группа 1</string>
+    <string name="module_description">Блокировка обновлений (включая автоматические) выбранных приложений из любых магазинов приложений</string>
+    <string name="app_status_not_loaded">Модуль не загружен. Возможно, Xposed не установлен, его версия устарела или модуль не включён в менеджере Xposed.</string>
+    <string name="app_status_loaded_disabled">Модуль загружен, но выключен</string>
+    <string name="app_status_loaded_enabled">Модуль загружен и включён</string>
+    <string name="enable_module">Включить модуль</string>
+    <string name="filter_apps">Искать приложения</string>
+    <string name="show_system_apps">Показывать системные приложения</string>
+    <string name="blocked_first">Сначала заблокированные</string>
+    <string name="select_blacklisted_apps">Выбрать приложения для блокировки обновлений</string>
+    <string name="import_settings">Импортировать настройки</string>
+    <string name="export_settings">Экспортировать настройки</string>
+    <string name="about_app">О приложении</string>
+    <string name="about_app_part_2">Этот модуль Xposed блокирует обновления (включая автоматические) выбранных приложений независимо от того, из какого магазина они были установлены. Магазины приложений по-прежнему будут находить обновления для этих приложений, но не смогут их установить.</string>
+    <string name="about_app_part_4">Автор: Senliast</string>
+    <string name="please_wait">Пожалуйста, подождите…</string>
+    <string name="preferences_successfully_imported">"Настройки успешно импортированы из файла: "</string>
+    <string name="not_a_valid_preferences_file">"Это не файл настроек приложения «Менеджер обновлений»: "</string>
+    <string name="error_importing_preferences">"Ошибка импорта настроек: "</string>
+    <string name="preferences_successfully_exported">"Настройки успешно экспортированы в файл: "</string>
+    <string name="error_exporting_preferences">"Ошибка экспорта настроек: "</string>
+    <string name="app_status_waiting_for_reboot">Модуль ещё не работает: после его установки или обновления устройство не было перезагружено. Сейчас разрешены все обновления приложений! Перезагрузите устройство, чтобы модуль начал работать.</string>
+    <string name="welcome_message_title">Добро пожаловать в модуль Xposed «Менеджер обновлений»</string>
+    <string name="ok">OK</string>
+    <string name="info_always_reboot_after_update">После каждого обновления этого модуля обязательно перезагружайте устройство, чтобы он продолжал работать.</string>
+    <string name="select_installation_sources">Выбрать источники установки для блокировки (магазины приложений)</string>
+    <string name="select_groups">Управление группами правил</string>
+    <string name="add_group_title">Добавить группу</string>
+    <string name="add_group_text">Название</string>
+    <string name="remove_group_title">Удалить группу</string>
+    <string name="remove_group_text_1">Группа \"</string>
+    <string name="remove_group_text_2">\" будет удалена. Продолжить?</string>
+    <string name="cancel">Отмена</string>
+    <string name="rename_group_title">Переименовать группу</string>
+    <string name="block_from_all">Блокировать обновления из всех источников установки</string>
+    <string name="fifteen_min">15 мин.</string>
+    <string name="thirty_min">30 мин.</string>
+    <string name="forty_five_min">45 мин.</string>
+    <string name="sixty_min">60 мин.</string>
+    <string name="disable_module">Выключить модуль</string>
+    <string name="disable_group">Выключить группу</string>
+    <string name="group_status_disabled">Выключена</string>
+    <string name="group_status_paused">"Приостановлена, осталось: "</string>
+    <string name="group_status_enabled">Включена</string>
+    <string name="until_enabled_manually">До включения вручную</string>
+    <string name="app_status_paused">"Модуль загружен, но приостановлен, осталось: "</string>
+    <string name="app_status_disabled_for_groups">Модуль выключен</string>
+</resources>

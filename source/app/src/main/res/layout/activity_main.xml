@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activityMain"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@style/Theme.Material3.DynamicColors.DayNight"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/buttonSelectBlacklistedApps"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/select_groups"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mobvSwitchEnableModule" />
+
+            <LinearLayout
+                android:id="@+id/layoutImportExport"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@+id/buttonSelectBlacklistedApps"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonImportSettings"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_weight="1"
+                    android:text="@string/import_settings"
+                    app:shapeAppearanceOverlay="@style/Shape.LeftButton"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/buttonExportSettings"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    android:text="@string/export_settings"
+                    app:shapeAppearanceOverlay="@style/Shape.RightButton"
+                    android:insetLeft="0dp"
+                    android:insetTop="0dp"
+                    android:insetRight="0dp"
+                    android:insetBottom="0dp"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonAbout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:text="@string/about_app"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/layoutImportExport" />
+
+            <FrameLayout
+                android:id="@+id/layoutStatusPanel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintBottom_toTopOf="@+id/switchEnableModule"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+            </FrameLayout>
+
+            <view
+                android:id="@+id/mobvSwitchEnableModule"
+                class="com.senliast.updatesmanagerextended.MyObjectBackgroundView"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="20dp"
+                android:alpha="0.5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/layoutStatusPanel" />
+
+            <TextView
+                android:id="@+id/textViewEnableModuke"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="@string/enable_module"
+                app:layout_constraintBottom_toBottomOf="@id/mobvSwitchEnableModule"
+                app:layout_constraintStart_toStartOf="@id/mobvSwitchEnableModule"
+                app:layout_constraintTop_toTopOf="@id/mobvSwitchEnableModule" />
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/switchEnableModule"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintBottom_toBottomOf="@id/mobvSwitchEnableModule"
+                app:layout_constraintEnd_toEndOf="@id/mobvSwitchEnableModule"
+                app:layout_constraintTop_toTopOf="@id/mobvSwitchEnableModule" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
