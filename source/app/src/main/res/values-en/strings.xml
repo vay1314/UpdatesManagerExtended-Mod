@@ -13,7 +13,7 @@
     <string name="about_app">About this app</string>
     <string name="about_app_part_1">Updates Manager Extended v4.2</string>
     <string name="about_app_part_2">This Xposed module blocks updates (including automatic updates) for selected apps, regardless of which app store they were installed from. App stores will still detect updates for these apps, but will be unable to install them.</string>
-    <string name="about_app_part_4">Created by Senliast</string>
+    <string name="about_app_part_4">Original author: Senliast</string>
     <string name="about_app_part_5" translatable="false">https://github.com/Senliast/xposed-modules/tree/main/Updates_Manager_Extended</string>
     <string name="please_wait">Please wait...</string>
     <string name="preferences_successfully_imported">"Settings successfully imported from file: "</string>
@@ -52,5 +52,7 @@
     <string name="app_status_reloading">Hot-reloading the module. Please wait…</string>
     <string name="app_status_not_running">No module was detected in the system process. Check that the module and System Framework (system) scope are enabled in LSPosed. If you already restarted, check the module loading logs.</string>
     <string name="app_status_unknown">Cannot determine the module runtime state. Check the logs for framework service or runtime query errors.</string>
+    <string name="about_mod_author">MOD author: vay1314</string>
+    <string name="about_mod_project_url" translatable="false">https://github.com/vay1314/UpdatesManagerExtended-Mod</string>
 </resources>
 

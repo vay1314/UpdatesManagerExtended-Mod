@@ -17,7 +17,7 @@
     <string name="export_settings">Экспортировать настройки</string>
     <string name="about_app">О приложении</string>
     <string name="about_app_part_2">Этот модуль Xposed блокирует обновления (включая автоматические) выбранных приложений независимо от того, из какого магазина они были установлены. Магазины приложений по-прежнему будут находить обновления для этих приложений, но не смогут их установить.</string>
-    <string name="about_app_part_4">Автор: Senliast</string>
+    <string name="about_app_part_4">Автор оригинала: Senliast</string>
     <string name="please_wait">Пожалуйста, подождите…</string>
     <string name="preferences_successfully_imported">"Настройки успешно импортированы из файла: "</string>
     <string name="not_a_valid_preferences_file">"Это не файл настроек приложения «Менеджер обновлений»: "</string>
@@ -53,4 +53,6 @@
     <string name="app_status_reloading">Выполняется горячая перезагрузка модуля. Подождите…</string>
     <string name="app_status_not_running">Модуль не обнаружен в системном процессе. Проверьте, включены ли модуль и область действия System Framework (system) в LSPosed. Если устройство уже перезагружено, проверьте журнал загрузки модуля.</string>
     <string name="app_status_unknown">Не удалось определить состояние модуля. Проверьте журнал на ошибки службы фреймворка или запроса состояния.</string>
+    <string name="about_mod_author">Автор MOD: vay1314</string>
+    <string name="about_mod_project_url" translatable="false">https://github.com/vay1314/UpdatesManagerExtended-Mod</string>
 </resources>

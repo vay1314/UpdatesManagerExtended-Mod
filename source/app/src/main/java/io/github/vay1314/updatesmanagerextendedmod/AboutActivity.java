@@ -1,13 +1,8 @@
 package io.github.vay1314.updatesmanagerextendedmod;
 
-import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
-import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,9 +18,6 @@ import androidx.core.view.WindowInsetsControllerCompat;
 
 public class AboutActivity extends AppCompatActivity {
 
-    SpannableString spannableString;
-    ClickableSpan clickableSpan;
-    private TextView textViewAboutPart5;
     private Toolbar toolbar;
 
     @Override
@@ -74,17 +66,9 @@ public class AboutActivity extends AppCompatActivity {
             }
         });
 
-        textViewAboutPart5 = findViewById(R.id.textViewAboutPart5);
-        spannableString = new SpannableString(getText(R.string.about_app_part_5));
-        clickableSpan = new ClickableSpan() {
-            @Override
-            public void onClick(View widget) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.about_app_part_5)));
-                startActivity(browserIntent);
-            }
-        };
-        spannableString.setSpan(clickableSpan, 0, getString(R.string.about_app_part_4).length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        textViewAboutPart5.setText(spannableString);
-        textViewAboutPart5.setMovementMethod(LinkMovementMethod.getInstance());
+        TextView originalProject = findViewById(R.id.textViewAboutPart5);
+        TextView modProject = findViewById(R.id.textViewModProject);
+        originalProject.setMovementMethod(LinkMovementMethod.getInstance());
+        modProject.setMovementMethod(LinkMovementMethod.getInstance());
     }
 }

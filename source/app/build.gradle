@@ -26,7 +26,7 @@ android {
         applicationId "io.github.vay1314.updatesmanagerextendedmod"
         minSdk 26
         targetSdk 34
-        versionCode 17
+        versionCode 18
         versionName '4.2'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

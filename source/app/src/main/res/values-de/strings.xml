@@ -17,7 +17,7 @@
     <string name="export_settings">Einstellungen exportieren</string>
     <string name="about_app">Über diese App</string>
     <string name="about_app_part_2">Dieses Xposed-Modul blockiert Updates (einschließlich automatischer Updates) für ausgewählte Apps, unabhängig davon, aus welchem App-Store sie installiert wurden. App-Stores erkennen weiterhin Updates für diese Apps, können sie jedoch nicht installieren.</string>
-    <string name="about_app_part_4">Entwickelt von Senliast</string>
+    <string name="about_app_part_4">Originalautor: Senliast</string>
     <string name="please_wait">Bitte warten...</string>
     <string name="preferences_successfully_imported">"Einstellungen erfolgreich aus der Datei importiert: "</string>
     <string name="not_a_valid_preferences_file">"Dies ist keine gültige Einstellungsdatei für den App-Update-Manager: "</string>
@@ -53,4 +53,6 @@
     <string name="app_status_reloading">Modul wird neu geladen. Bitte warten…</string>
     <string name="app_status_not_running">Kein Modul im Systemprozess erkannt. Prüfen Sie in LSPosed, ob das Modul und der Bereich System Framework (system) aktiviert sind. Wenn das Gerät bereits neu gestartet wurde, prüfen Sie die Modulprotokolle.</string>
     <string name="app_status_unknown">Der Laufzeitstatus des Moduls kann nicht ermittelt werden. Prüfen Sie die Protokolle auf Fehler beim Framework-Dienst oder bei der Statusabfrage.</string>
+    <string name="about_mod_author">MOD-Autor: vay1314</string>
+    <string name="about_mod_project_url" translatable="false">https://github.com/vay1314/UpdatesManagerExtended-Mod</string>
 </resources>
