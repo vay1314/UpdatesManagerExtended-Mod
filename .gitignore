@@ -5,3 +5,4 @@ source/**/build/
 *.jks
 *.keystore
 dist/
+.github/scripts/__pycache__/

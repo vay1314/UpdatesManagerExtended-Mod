@@ -1,0 +1,123 @@
+name: 构建与发布 APK
+
+on:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+concurrency:
+  group: apk-release
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: write
+    env:
+      PUBLISH_RELEASE: 'true'
+    steps:
+      - name: 获取源码
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          ref: ${{ github.sha }}
+
+      - name: 检查构建辅助脚本
+        run: python3 -m unittest discover -s .github/scripts -p 'test_*.py'
+
+      - name: 安装 Java 17
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: 安装 Android SDK
+        uses: android-actions/setup-android@be39fa834029ff78f1a44aa3bb0819b8fc2bd8fd # v4.0.4
+        with:
+          packages: 'platform-tools platforms;android-37.0 build-tools;35.0.0'
+
+      - name: 配置 Gradle 缓存
+        uses: gradle/actions/setup-gradle@3f5f9adaf7d9fecd50b5935e54106014257a94e6 # v6.4.0
+        with:
+          cache-read-only: ${{ github.ref_type == 'tag' }}
+
+      - name: 准备签名
+        id: signing
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        shell: bash
+        run: python3 .github/scripts/prepare_signing.py
+
+      - name: 执行测试与构建
+        working-directory: source
+        env:
+          BUILD_VARIANT: ${{ steps.signing.outputs.variant }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          chmod +x gradlew
+          case "$BUILD_VARIANT" in
+            release) ./gradlew --no-daemon --console=plain testReleaseUnitTest assembleRelease ;;
+            debug) ./gradlew --no-daemon --console=plain testDebugUnitTest assembleDebug ;;
+            *) echo '::error::未知构建类型。'; exit 1 ;;
+          esac
+
+      - name: 整理安装包
+        id: package
+        env:
+          BUILD_VARIANT: ${{ steps.signing.outputs.variant }}
+        shell: bash
+        run: python3 .github/scripts/package_apk.py
+
+      - name: 验证签名与生成校验文件
+        env:
+          APK_FILE: ${{ steps.package.outputs.apk }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          "$ANDROID_HOME/build-tools/35.0.0/apksigner" verify --verbose --print-certs "$APK_FILE"
+          cd dist
+          apk_name=$(basename "$APK_FILE")
+          sha256sum "$apk_name" > "$apk_name.sha256"
+
+      - name: 上传构建产物
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: ${{ steps.package.outputs.name }}
+          path: |
+            dist/*.apk
+            dist/*.sha256
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: 发布到 GitHub Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          APK_FILE: ${{ steps.package.outputs.apk }}
+          RELEASE_TAG: ${{ steps.package.outputs.tag }}
+          BUILD_COMMIT: ${{ github.sha }}
+        shell: bash
+        run: python3 .github/scripts/publish_release.py
+
+      - name: 上传测试报告
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: test-reports-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            source/app/build/reports/tests/
+            source/app/build/test-results/
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: 清理签名文件
+        if: always()
+        shell: bash
+        run: rm -f source/keystore.properties source/release-signing.jks
