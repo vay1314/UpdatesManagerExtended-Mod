@@ -63,5 +63,8 @@
     <string name="profile_private">Privater Bereich: %1$s</string>
     <string name="profile_other">Anderer Bereich: %1$s</string>
     <string name="profile_current">Aktueller Bereich</string>
-    <string name="profile_query_partial">Apps konnten nicht aus allen Bereichen gelesen werden. Bitte Root-Zugriff prüfen. Sichtbare Apps und gespeicherte Regeln bleiben verwaltbar.</string>
+    <string name="profile_query_partial">Die App-Liste konnte nicht vollständig gelesen werden. Möglicherweise fehlt der Root-Zugriff oder einige Bereiche sind vorübergehend nicht verfügbar.\n\nErlaube dieser App den Root-Zugriff in Magisk, KernelSU oder deinem Root-Manager und tippe dann auf „Erneut versuchen“.\n\nSichtbare Apps und gespeicherte Sperrregeln können weiterhin verwaltet werden.</string>
+    <string name="profile_query_title">Apps nicht aus allen Bereichen lesbar</string>
+    <string name="profile_query_retry">Erneut versuchen</string>
+    <string name="profile_query_continue">Weiter</string>
 </resources>

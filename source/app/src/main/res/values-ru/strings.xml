@@ -63,5 +63,8 @@
     <string name="profile_private">Личное пространство: %1$s</string>
     <string name="profile_other">Другое пространство: %1$s</string>
     <string name="profile_current">Текущее пространство</string>
-    <string name="profile_query_partial">Не удалось получить приложения из всех пространств. Проверьте root-доступ. Видимые приложения и сохранённые правила доступны для управления.</string>
+    <string name="profile_query_partial">Не удалось прочитать полный список приложений. Возможно, не предоставлен root-доступ или некоторые пространства временно недоступны.\n\nПредоставьте этому приложению root-доступ в Magisk, KernelSU или другом менеджере root, затем нажмите «Повторить».\n\nВы также можете продолжить управление видимыми приложениями и сохранёнными правилами блокировки.</string>
+    <string name="profile_query_title">Не удалось получить приложения из всех пространств</string>
+    <string name="profile_query_retry">Повторить</string>
+    <string name="profile_query_continue">Продолжить</string>
 </resources>

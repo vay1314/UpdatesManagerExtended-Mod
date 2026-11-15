@@ -62,5 +62,8 @@
     <string name="profile_private">私人空間：%1$s</string>
     <string name="profile_other">其他空間：%1$s</string>
     <string name="profile_current">目前空間</string>
-    <string name="profile_query_partial">無法讀取所有空間的應用程式，請檢查 Root 授權；仍可管理目前可見的應用程式與已儲存規則。</string>
+    <string name="profile_query_partial">無法完整讀取所有空間的應用程式，可能尚未取得 Root 授權，或部分空間暫時無法存取。\n\n請在 Magisk、KernelSU 或其他 Root 管理員中，允許本應用程式使用 Root 權限，再點選「重試」。\n\n也可以繼續管理目前可見的應用程式與已儲存的攔截規則。</string>
+    <string name="profile_query_title">無法讀取所有空間的應用程式</string>
+    <string name="profile_query_retry">重試</string>
+    <string name="profile_query_continue">繼續使用</string>
 </resources>

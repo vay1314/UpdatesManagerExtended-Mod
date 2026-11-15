@@ -62,6 +62,9 @@
     <string name="profile_private">Private space: %1$s</string>
     <string name="profile_other">Other space: %1$s</string>
     <string name="profile_current">Current space</string>
-    <string name="profile_query_partial">Could not read apps from all spaces. Check root access; visible apps and saved rules can still be managed.</string>
+    <string name="profile_query_partial">The app list could not be read completely. Root access may not be granted, or some spaces may be temporarily unavailable.\n\nGrant this app root access in Magisk, KernelSU, or your root manager, then tap Retry.\n\nYou can also continue managing visible apps and saved blocking rules.</string>
+    <string name="profile_query_title">Cannot read apps from all spaces</string>
+    <string name="profile_query_retry">Retry</string>
+    <string name="profile_query_continue">Continue</string>
 </resources>
 

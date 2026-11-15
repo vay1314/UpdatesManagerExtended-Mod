@@ -42,6 +42,7 @@ public class AppSelectionActivity extends AppCompatActivity {
     private Set<String> toggledApps;
     private boolean showSystemApps = false;
     private boolean sortToggledFirst = true;
+    private boolean profileQueryWarningShown;
     private SearchView searchView;
     MyPreferencesManager myPreferencesManager = new MyPreferencesManager();
     private MaterialAlertDialogBuilder builder;
@@ -199,13 +200,25 @@ public class AppSelectionActivity extends AppCompatActivity {
                 filterApps();
                 sortApps();
                 alertDialogDialogLoading.dismiss();
-                if (!result.complete) {
-                    android.widget.Toast.makeText(this, R.string.profile_query_partial,
-                            android.widget.Toast.LENGTH_LONG).show();
+                if (!result.complete && !profileQueryWarningShown) {
+                    showProfileQueryWarning();
                 }
             });
         });
         executor.shutdown();
+    }
+
+    private void showProfileQueryWarning() {
+        profileQueryWarningShown = true;
+        new MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.profile_query_title)
+                .setMessage(R.string.profile_query_partial)
+                .setNegativeButton(R.string.profile_query_continue, (dialog, which) -> {})
+                .setPositiveButton(R.string.profile_query_retry, (dialog, which) -> {
+                    profileQueryWarningShown = false;
+                    loadInstalledApps();
+                })
+                .show();
     }
 
     private void sortApps() {
