@@ -54,4 +54,5 @@
     <string name="app_status_unknown">无法确认模块运行状态。请查看模块日志，检查框架服务或状态查询是否异常。</string>
     <string name="about_mod_author">MOD 作者：vay1314</string>
     <string name="about_mod_project_url" translatable="false">https://github.com/vay1314/UpdatesManagerExtended-Mod</string>
+    <string name="saved_package_unavailable">未安装或当前空间不可见</string>
 </resources>

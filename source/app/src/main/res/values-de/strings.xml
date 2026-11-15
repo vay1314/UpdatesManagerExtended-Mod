@@ -55,4 +55,5 @@
     <string name="app_status_unknown">Der Laufzeitstatus des Moduls kann nicht ermittelt werden. Prüfen Sie die Protokolle auf Fehler beim Framework-Dienst oder bei der Statusabfrage.</string>
     <string name="about_mod_author">MOD-Autor: vay1314</string>
     <string name="about_mod_project_url" translatable="false">https://github.com/vay1314/UpdatesManagerExtended-Mod</string>
+    <string name="saved_package_unavailable">Nicht installiert oder in diesem Profil nicht sichtbar</string>
 </resources>

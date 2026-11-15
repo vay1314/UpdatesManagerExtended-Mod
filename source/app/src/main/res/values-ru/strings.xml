@@ -55,4 +55,5 @@
     <string name="app_status_unknown">Не удалось определить состояние модуля. Проверьте журнал на ошибки службы фреймворка или запроса состояния.</string>
     <string name="about_mod_author">Автор MOD: vay1314</string>
     <string name="about_mod_project_url" translatable="false">https://github.com/vay1314/UpdatesManagerExtended-Mod</string>
+    <string name="saved_package_unavailable">Не установлено или недоступно в этом профиле</string>
 </resources>

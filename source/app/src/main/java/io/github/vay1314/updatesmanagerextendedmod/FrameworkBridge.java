@@ -99,7 +99,6 @@ public final class FrameworkBridge {
             }
             if (remoteRules == null) {
                 new MyPreferencesManager().upgradePreferencesDatabase();
-                new SettingsSanitizer().sanitize();
                 remoteRules = service.getRemotePreferences("Rules");
             }
             publishRules();

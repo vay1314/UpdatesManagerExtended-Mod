@@ -54,5 +54,6 @@
     <string name="app_status_unknown">Cannot determine the module runtime state. Check the logs for framework service or runtime query errors.</string>
     <string name="about_mod_author">MOD author: vay1314</string>
     <string name="about_mod_project_url" translatable="false">https://github.com/vay1314/UpdatesManagerExtended-Mod</string>
+    <string name="saved_package_unavailable">Not installed or unavailable in this profile</string>
 </resources>
 

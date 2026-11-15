@@ -28,7 +28,6 @@ import me.zhanghai.android.fastscroll.FastScroller;
 import me.zhanghai.android.fastscroll.FastScrollerBuilder;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -190,26 +189,31 @@ public class AppSelectionActivity extends AppCompatActivity {
         alertDialogDialogLoading.setCanceledOnTouchOutside(false);
         alertDialogDialogLoading.setOnKeyListener((dialog, keyCode, event) -> true);
 
+        Set<String> savedPackages = new HashSet<>(toggledApps);
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
 
-            appList.clear();
-            finalAppList.clear();
+            List<AppInfo> loadedApps = new ArrayList<>();
             PackageManager pm = getPackageManager();
             List<ApplicationInfo> apps = pm.getInstalledApplications(PackageManager.GET_META_DATA);
 
             for (ApplicationInfo app : apps) {
-                if (showSystemApps || (app.flags & ApplicationInfo.FLAG_SYSTEM) == 0) {
+                if (showSystemApps || (app.flags & ApplicationInfo.FLAG_SYSTEM) == 0
+                        || savedPackages.contains(app.packageName)) {
                     String appName = app.loadLabel(pm).toString();
                     Drawable appIcon = app.loadIcon(pm);
                     String packageName = app.packageName;
-                    appList.add(new AppInfo(appName, packageName, appIcon));
+                    loadedApps.add(new AppInfo(appName, packageName, appIcon));
                 }
             }
 
-            finalAppList.addAll(appList);
+            PackageSelection.includeSaved(loadedApps, savedPackages,
+                    AppInfo::getPackageName, packageName -> AppInfo.loadSaved(this, packageName));
 
             runOnUiThread(() -> {
+                if (isFinishing() || isDestroyed()) return;
+                appList.clear();
+                appList.addAll(loadedApps);
                 filterApps();
                 sortApps();
                 alertDialogDialogLoading.dismiss();
@@ -240,7 +244,7 @@ public class AppSelectionActivity extends AppCompatActivity {
         groups.addAll(myPreferencesManager.getGroups());
         if (appAdapter != null) { appAdapter.notifyDataSetChanged(); }
         toggledApps.clear();
-        toggledApps.addAll(Arrays.asList(groups.get(myPreferencesManager.getIntPreference("groupToEdit", 0)).getAppsToBlockUpdates().split(",")));
+        toggledApps.addAll(PackageSelection.parse(groups.get(myPreferencesManager.getIntPreference("groupToEdit", 0)).getAppsToBlockUpdates()));
     }
 
     private void saveToggledApps() {

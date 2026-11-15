@@ -54,4 +54,5 @@
     <string name="app_status_unknown">無法確認模組執行狀態。請查看模組記錄，檢查框架服務或狀態查詢是否異常。</string>
     <string name="about_mod_author">MOD 作者：vay1314</string>
     <string name="about_mod_project_url" translatable="false">https://github.com/vay1314/UpdatesManagerExtended-Mod</string>
+    <string name="saved_package_unavailable">未安裝或目前空間不可見</string>
 </resources>

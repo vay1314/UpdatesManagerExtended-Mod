@@ -6,7 +6,6 @@ import android.content.Intent;
 
 public class BootReceiver extends BroadcastReceiver {
 
-    private SettingsSanitizer settingsSanitizer = new SettingsSanitizer();
     MyPreferencesManager myPreferencesManager = new MyPreferencesManager();
 
     @Override
@@ -14,7 +13,6 @@ public class BootReceiver extends BroadcastReceiver {
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
             if (myPreferencesManager.testPreferences()) {
                 myPreferencesManager.upgradePreferencesDatabase();
-                settingsSanitizer.sanitize();
             }
         }
     }

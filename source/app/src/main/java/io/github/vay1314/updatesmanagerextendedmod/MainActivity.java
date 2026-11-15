@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     private Button buttonAbout;
     private MyPreferencesManager myPreferencesManager = new MyPreferencesManager();
     private MyPreferencesBackupManager myPreferencesBackupManager = new MyPreferencesBackupManager(this);
-    private SettingsSanitizer settingsSanitizer = new SettingsSanitizer();
     private MaterialAlertDialogBuilder builder;
     private MyObjectBackgroundView mobvStatusPanelBackground;
     private MyObjectBackgroundView mobvSwitchEnabledBackground;
@@ -276,7 +275,6 @@ public class MainActivity extends AppCompatActivity {
                 switchModuleEnabledSwitchedListenerEnabled = false;
                 switchModuleEnabled.setChecked(true);
                 switchModuleEnabledSwitchedListenerEnabled = true;
-                settingsSanitizer.sanitize();
             } else {
                 if (myPreferencesManager.getStringPreference("moduleStatus", "disabled").equals("enabled_since") && System.currentTimeMillis() < myPreferencesManager.getLongPreference("moduleStatusTime", 0L)) {
                     mobvStatusPanelBackground.setRectangleColor(Color.YELLOW);

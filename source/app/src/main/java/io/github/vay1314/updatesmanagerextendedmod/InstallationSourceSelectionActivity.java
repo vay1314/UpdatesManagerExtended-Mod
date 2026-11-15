@@ -31,7 +31,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -231,10 +230,10 @@ public class InstallationSourceSelectionActivity extends AppCompatActivity {
         alertDialogDialogLoading.setCanceledOnTouchOutside(false);
         alertDialogDialogLoading.setOnKeyListener((dialog, keyCode, event) -> true);
 
+        Set<String> savedPackages = new HashSet<>(toggledApps);
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
-            appList.clear();
-            finalAppList.clear();
+            List<InstallationSourceInfo> loadedApps = new ArrayList<>();
 
             PackageManager pm = getPackageManager();
 
@@ -257,15 +256,22 @@ public class InstallationSourceSelectionActivity extends AppCompatActivity {
                         String appName =  pkg.applicationInfo.loadLabel(pm).toString();
                         Drawable appIcon = pkg.applicationInfo.loadIcon(pm);
                         String packageName = pkg.applicationInfo.packageName;
-                        appList.add(new InstallationSourceInfo(appName, packageName, appIcon));
+                        loadedApps.add(new InstallationSourceInfo(appName, packageName, appIcon));
                         break;
                     }
                 }
             }
 
-            finalAppList.addAll(appList);
+            PackageSelection.includeSaved(loadedApps, savedPackages,
+                    InstallationSourceInfo::getPackageName, packageName -> {
+                AppInfo saved = AppInfo.loadSaved(this, packageName);
+                return new InstallationSourceInfo(saved.getAppName(), packageName, saved.getAppIcon());
+            });
 
             runOnUiThread(() -> {
+                if (isFinishing() || isDestroyed()) return;
+                appList.clear();
+                appList.addAll(loadedApps);
                 filterApps();
                 sortApps();
                 alertDialogDialogLoading.dismiss();
@@ -296,7 +302,7 @@ public class InstallationSourceSelectionActivity extends AppCompatActivity {
         groups.addAll(myPreferencesManager.getGroups());
         if (installationSourceAdapter != null) { installationSourceAdapter.notifyDataSetChanged(); }
         toggledApps.clear();
-        toggledApps.addAll(Arrays.asList(groups.get(myPreferencesManager.getIntPreference("groupToEdit", 0)).getInstallationSources().split(",")));
+        toggledApps.addAll(PackageSelection.parse(groups.get(myPreferencesManager.getIntPreference("groupToEdit", 0)).getInstallationSources()));
     }
 
     private void saveGroups() {
