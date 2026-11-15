@@ -56,4 +56,12 @@
     <string name="about_mod_author">MOD-Autor: vay1314</string>
     <string name="about_mod_project_url" translatable="false">https://github.com/vay1314/UpdatesManagerExtended-Mod</string>
     <string name="saved_package_unavailable">Nicht installiert oder in diesem Profil nicht sichtbar</string>
+    <string name="profile_main">Hauptbereich</string>
+    <string name="profile_clone">Klonbereich</string>
+    <string name="profile_both">Beide Bereiche</string>
+    <string name="profile_work">Arbeitsprofil: %1$s</string>
+    <string name="profile_private">Privater Bereich: %1$s</string>
+    <string name="profile_other">Anderer Bereich: %1$s</string>
+    <string name="profile_current">Aktueller Bereich</string>
+    <string name="profile_query_partial">Apps konnten nicht aus allen Bereichen gelesen werden. Bitte Root-Zugriff prüfen. Sichtbare Apps und gespeicherte Regeln bleiben verwaltbar.</string>
 </resources>

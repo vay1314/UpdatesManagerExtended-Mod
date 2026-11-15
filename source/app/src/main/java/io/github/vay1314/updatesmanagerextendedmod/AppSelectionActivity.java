@@ -1,9 +1,6 @@
 package io.github.vay1314.updatesmanagerextendedmod;
 
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -193,30 +190,19 @@ public class AppSelectionActivity extends AppCompatActivity {
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(() -> {
 
-            List<AppInfo> loadedApps = new ArrayList<>();
-            PackageManager pm = getPackageManager();
-            List<ApplicationInfo> apps = pm.getInstalledApplications(PackageManager.GET_META_DATA);
-
-            for (ApplicationInfo app : apps) {
-                if (showSystemApps || (app.flags & ApplicationInfo.FLAG_SYSTEM) == 0
-                        || savedPackages.contains(app.packageName)) {
-                    String appName = app.loadLabel(pm).toString();
-                    Drawable appIcon = app.loadIcon(pm);
-                    String packageName = app.packageName;
-                    loadedApps.add(new AppInfo(appName, packageName, appIcon));
-                }
-            }
-
-            PackageSelection.includeSaved(loadedApps, savedPackages,
-                    AppInfo::getPackageName, packageName -> AppInfo.loadSaved(this, packageName));
+            InstalledAppLoader.Result result = InstalledAppLoader.load(this, showSystemApps, savedPackages);
 
             runOnUiThread(() -> {
                 if (isFinishing() || isDestroyed()) return;
                 appList.clear();
-                appList.addAll(loadedApps);
+                appList.addAll(result.apps);
                 filterApps();
                 sortApps();
                 alertDialogDialogLoading.dismiss();
+                if (!result.complete) {
+                    android.widget.Toast.makeText(this, R.string.profile_query_partial,
+                            android.widget.Toast.LENGTH_LONG).show();
+                }
             });
         });
         executor.shutdown();

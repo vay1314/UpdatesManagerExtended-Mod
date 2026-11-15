@@ -55,5 +55,13 @@
     <string name="about_mod_author">MOD author: vay1314</string>
     <string name="about_mod_project_url" translatable="false">https://github.com/vay1314/UpdatesManagerExtended-Mod</string>
     <string name="saved_package_unavailable">Not installed or unavailable in this profile</string>
+    <string name="profile_main">Main space</string>
+    <string name="profile_clone">Clone space</string>
+    <string name="profile_both">Both spaces</string>
+    <string name="profile_work">Work profile: %1$s</string>
+    <string name="profile_private">Private space: %1$s</string>
+    <string name="profile_other">Other space: %1$s</string>
+    <string name="profile_current">Current space</string>
+    <string name="profile_query_partial">Could not read apps from all spaces. Check root access; visible apps and saved rules can still be managed.</string>
 </resources>
 

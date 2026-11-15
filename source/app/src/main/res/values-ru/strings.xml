@@ -56,4 +56,12 @@
     <string name="about_mod_author">Автор MOD: vay1314</string>
     <string name="about_mod_project_url" translatable="false">https://github.com/vay1314/UpdatesManagerExtended-Mod</string>
     <string name="saved_package_unavailable">Не установлено или недоступно в этом профиле</string>
+    <string name="profile_main">Основное пространство</string>
+    <string name="profile_clone">Клонированное пространство</string>
+    <string name="profile_both">Оба пространства</string>
+    <string name="profile_work">Рабочий профиль: %1$s</string>
+    <string name="profile_private">Личное пространство: %1$s</string>
+    <string name="profile_other">Другое пространство: %1$s</string>
+    <string name="profile_current">Текущее пространство</string>
+    <string name="profile_query_partial">Не удалось получить приложения из всех пространств. Проверьте root-доступ. Видимые приложения и сохранённые правила доступны для управления.</string>
 </resources>

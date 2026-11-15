@@ -55,4 +55,12 @@
     <string name="about_mod_author">MOD 作者：vay1314</string>
     <string name="about_mod_project_url" translatable="false">https://github.com/vay1314/UpdatesManagerExtended-Mod</string>
     <string name="saved_package_unavailable">未安装或当前空间不可见</string>
+    <string name="profile_main">主空间</string>
+    <string name="profile_clone">分身空间</string>
+    <string name="profile_both">两边都有</string>
+    <string name="profile_work">工作资料：%1$s</string>
+    <string name="profile_private">私密空间：%1$s</string>
+    <string name="profile_other">其他空间：%1$s</string>
+    <string name="profile_current">当前空间</string>
+    <string name="profile_query_partial">未能读取所有空间的应用，请检查 Root 授权；当前可见应用和已保存规则仍可管理。</string>
 </resources>

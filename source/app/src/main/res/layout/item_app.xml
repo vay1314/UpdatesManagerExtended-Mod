@@ -42,9 +42,25 @@
         android:singleLine="true"
         android:textAppearance="?attr/textAppearanceBodySmall"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewAppName"
+        android:layout_marginTop="2dp"
         app:layout_constraintEnd_toStartOf="@id/toggleSwitch"
         app:layout_constraintStart_toEndOf="@id/imageViewAppIcon" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/profileBadges"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="3dp"
+        app:chipSpacingHorizontal="4dp"
+        app:chipSpacingVertical="2dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@id/imageViewAppIcon"
+        app:layout_constraintEnd_toStartOf="@id/toggleSwitch"
+        app:layout_constraintTop_toBottomOf="@id/textViewPackageName"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <com.google.android.material.materialswitch.MaterialSwitch
         android:id="@+id/toggleSwitch"
